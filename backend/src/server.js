@@ -30,6 +30,13 @@ app.use((req, res, next) => {
   res.status(404).json({ message: "Route not found" });
 });
 
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+
+  });
+
 app.listen(PORT, (err) => {
   if (err) {
     console.log(err, "Server is not connected");
